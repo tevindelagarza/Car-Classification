@@ -6,18 +6,18 @@ import cv2 # install opencv-python-headless
 
 
 
-LOCAL_SOURCE='/root/Car-Classification'
+LOCAL_SOURCE='/root'
 OUTPUT_PATH='/root/Car-Classification'
 
 
 
-HEIGHT = 224
-WIDTH = 224
+HEIGHT = 227
+WIDTH = 227
 CHANNELS = 3
 SHAPE = (HEIGHT, WIDTH, CHANNELS)
 
-h5_train_proc = { "fname": "train_cars.h5", "imgDir": "cars_train", "matFile": "cars_train_annos.mat"}
-h5_test_proc = { "fname": "test_cars.h5", "imgDir": "cars_test", "matFile": "cars_test_annos_withlabels.mat"}
+h5_train_proc = { "fname": "train_cars_227.h5", "imgDir": "cars_train", "matFile": "cars_train_annos.mat"}
+h5_test_proc = { "fname": "test_cars_227.h5", "imgDir": "cars_test", "matFile": "cars_test_annos_withlabels.mat"}
 
 for test_train in [h5_train_proc, h5_test_proc]:
   
