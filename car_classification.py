@@ -117,6 +117,126 @@ def resnet50(train_im, train_labels, test_im, test_labels):
 
 
 
+################################################################################
+#	AlexNet
+################################################################################
+def alexnet(train_im, train_labels, test_im, test_labels):
+
+    # train_im = train_im.reshape(-1 , 28, 28)
+    # test_im = test_im.reshape(-1,28,28)
+    # train_im = tf.expand_dims(train_im, axis=3, name=None)
+    # test_im = tf.expand_dims(test_im, axis=3, name=None)
+    # train_im = tf.image.grayscale_to_rgb(train_im)
+    # test_im = tf.image.grayscale_to_rgb(test_im)
+    train_im = tf.image.resize(train_im, [227, 227], method = 'bilinear')
+    test_im = tf.image.resize(test_im, [227, 227], method = 'bilinear')
+    
+    arr = [i for i in range(197)] 
+    # # (3) Create a sequential model
+    # model = tf.keras.Sequential()
+
+    # # 1st Convolutional Layer
+    # model.add(layers.Convolution2D(filters=96, input_shape=(224,224,3), kernel_size=(11,11),strides=(4,4), padding='valid'))
+    # model.add(layers.Activation('relu'))
+    # # Pooling 
+    # model.add(layers.MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='valid'))
+    # # Batch Normalisation before passing it to the next layer
+    # model.add(layers.BatchNormalization())
+
+    # # 2nd Convolutional Layer
+    # model.add(layers.Convolution2D(filters=256, kernel_size=(11,11), strides=(1,1), padding='valid'))
+    # model.add(layers.Activation('relu'))
+    # # Pooling
+    # model.add(layers.MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='valid'))
+    # # Batch Normalisation
+    # model.add(layers.BatchNormalization())
+
+    # # 3rd Convolutional Layer
+    # model.add(layers.Convolution2D(filters=384, kernel_size=(3,3), strides=(1,1), padding='valid'))
+    # model.add(layers.Activation('relu'))
+    # # Batch Normalisation
+    # model.add(layers.BatchNormalization())
+
+    # # 4th Convolutional Layer
+    # model.add(layers.Convolution2D(filters=384, kernel_size=(3,3), strides=(1,1), padding='valid'))
+    # model.add(layers.Activation('relu'))
+    # # Batch Normalisation
+    # model.add(layers.BatchNormalization())
+
+    # # 5th Convolutional Layer
+    # model.add(layers.Convolution2D(filters=256, kernel_size=(3,3), strides=(1,1), padding='valid'))
+    # model.add(layers.Activation('relu'))
+    # # Pooling
+    # model.add(layers.MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='valid'))
+    # # Batch Normalisation
+    # model.add(layers.BatchNormalization())
+
+    # # Passing it to a dense layer
+    # model.add(layers.Flatten())
+    # # 1st Dense Layer
+    # model.add(layers.Dense(4096, input_shape=(224*224*3,)))
+    # model.add(layers.Activation('relu'))
+    # # Add Dropout to prevent overfitting
+    # model.add(layers.Dropout(0.4))
+    # # Batch Normalisation
+    # model.add(layers.BatchNormalization())
+
+    # # 2nd Dense Layer
+    # model.add(layers.Dense(4096))
+    # model.add(layers.Activation('relu'))
+    # # Add Dropout
+    # model.add(layers.Dropout(0.4))
+    # # Batch Normalisation
+    # model.add(layers.BatchNormalization())
+
+    # # 3rd Dense Layer
+    # model.add(layers.Dense(1000))
+    # model.add(layers.Activation('relu'))
+    # # Add Dropout
+    # model.add(layers.Dropout(0.4))
+    # # Batch Normalisation
+    # model.add(layers.BatchNormalization())
+
+    # # Output Layer
+    # model.add(layers.Dense(17))
+    # model.add(layers.Activation('softmax'))
+
+    # model.summary()
+
+    # # (4) Compile 
+    # model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+    model = tf.keras.Sequential([
+        layers.Conv2D(filters=96, kernel_size=(11,11), strides=(4,4), activation='relu', input_shape=(227,227,3)),
+        layers.BatchNormalization(),
+        layers.MaxPool2D(pool_size=(3,3), strides=(2,2)),
+        layers.Conv2D(filters=256, kernel_size=(5,5), strides=(1,1), activation='relu', padding="same"),
+        layers.BatchNormalization(),
+        layers.MaxPool2D(pool_size=(3,3), strides=(2,2)),
+        layers.Conv2D(filters=384, kernel_size=(3,3), strides=(1,1), activation='relu', padding="same"),
+        layers.BatchNormalization(),
+        layers.Conv2D(filters=384, kernel_size=(3,3), strides=(1,1), activation='relu', padding="same"),
+        layers.BatchNormalization(),
+        layers.Conv2D(filters=256, kernel_size=(3,3), strides=(1,1), activation='relu', padding="same"),
+        layers.BatchNormalization(),
+        layers.MaxPool2D(pool_size=(3,3), strides=(2,2)),
+        layers.Flatten(),
+        layers.Dense(4096, activation='relu'),
+        layers.Dropout(0.5),
+        layers.Dense(4096, activation='relu'),
+        layers.Dropout(0.5),
+        layers.Dense(10, activation='softmax')
+    ])
+
+
+
+
+
+    # (5) Train
+    model.fit(train_im, train_labels,epochs = 50)
+    predictions_arr = model.predict(test_im)
+    prediction= [arr[np.argmax(predictions_arr[i])] for i in range(test_im.shape[0])]
+    return(prediction, test_labels)
 
 
 ################################################################################
@@ -126,8 +246,8 @@ def resnet50(train_im, train_labels, test_im, test_labels):
 # Trains a classifier of the specified type on the MNIST digit dataset
 def car_classifier(t, n, m):
     
-    training_dataset = h5py.File('/root/Car-Classification/train_cars.h5', "r")
-    testing_dataset = h5py.File('/root/Car-Classification/test_cars.h5', "r")
+    training_dataset = h5py.File('./train_cars.h5', "r")
+    testing_dataset = h5py.File('./test_cars.h5', "r")
 
     train_im = np.array(training_dataset["dataset_x"][:])
     train_labels = np.array(training_dataset["dataset_y"][:])
@@ -142,6 +262,7 @@ def car_classifier(t, n, m):
     
     if(t == "resnet50") : results.append(resnet50(train_im[0:n], train_labels[0:n], test_im[0:m], test_labels[0:m]))
     elif(t == "vgg16") : results.append(vgg16_func(train_im[0:n], train_labels[0:n], test_im[0:m], test_labels[0:m]))
+    elif(t == "alexnet") : results.append(alexnet(train_im[0:n], train_labels[0:n], test_im[0:m], test_labels[0:m]))
     arr = [i for i in range(197)] 
     for pred, true in results : Confusion_Matrix(pred, true, arr)
     # Load Dataset (note that test data is loaded separately lower down - this helps with memory)
@@ -190,6 +311,7 @@ def main():
     training_samples = 8144
     testing_samples = 8041
     # MNIST_classifier( "vgg16_scratch" , training_samples, testing_samples)
+    car_classifier( "alexnet" , training_samples, testing_samples)
     car_classifier( "resnet50" , training_samples, testing_samples)
     car_classifier( "vgg16" , training_samples, testing_samples)
  
