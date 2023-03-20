@@ -37,6 +37,8 @@ RESNET stands for Residual Network and is a convolution neural network that was 
 
 The attached ResNet50_Model_Summary.txt shows the model summary.
 
+The attached ResNet50V2_Model_Summary.txt shows the model summary.
+
 The main difference between ResNet50 and ResNet50V2 is that using a 1001-layer ResNet on CIFAR-10 (4.62% error) and CIFAR-100, and a 200-layer ResNet on ImageNet improved the results.
 
 
@@ -82,6 +84,9 @@ The above image clearly shows how vgg19 architecture works.
 
 It takes the image and uses convolution and maxpooling layers until it reaches the fully connected layers and then the softmax layer for final decision making. 
 
+vgg19_Model_Summary.txt shows the model summary.
+
+
 
 Results
 ------------------------------------------------------------------------------------------
@@ -93,7 +98,11 @@ Results
 
 AlexNet
 ------------------------------------------------------------------------------------------
+Unfortunately, everytime I tried to run the AlexNet Model my computer ran out of memory during the training layer. Next time I need to use Keras with the GPU but VScode was giving trouble with anaconda to make that happen in a timely manner. It is possible and there was documentation but it was a little out of date. 
 
+Anyways, AlexNet_Model_Summary.txt shows the AlexNet Model.
+
+<img width="985" alt="image" src="https://user-images.githubusercontent.com/62819751/226489246-cbe624f5-4a2b-4fc6-83bd-f2650cec2888.png">
 
 
 Final Thoughts
