@@ -15,3 +15,22 @@ The data will be loaded into the program by downloading the dataset and feeding 
 A confusion matrix will be generated to determine how accurate the model was and whether the prediction was true or not to determine the class. 
 
 If there is time I would like to load more images of cars that the dataset does not have like subarus, so the algorithm can determine more cars and it will help further prove that is classifying the cars correctly. 
+
+
+RESNET50
+------------------------------------------------------------------------------------------
+
+The attached resnet50modelsummary.txt shows the model summary.
+
+
+Results
+------------------------------------------------------------------------------------------
+
+
+VGG16
+------------------------------------------------------------------------------------------
+
+
+
+Results
+------------------------------------------------------------------------------------------
