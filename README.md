@@ -37,6 +37,9 @@ RESNET stands for Residual Network and is a convolution neural network that was 
 
 The attached ResNet50_Model_Summary.txt shows the model summary.
 
+The main difference between ResNet50 and ResNet50V2 is that using a 1001-layer ResNet on CIFAR-10 (4.62% error) and CIFAR-100, and a 200-layer ResNet on ImageNet improved the results.
+
+
 RESNET50:
 https://arxiv.org/abs/1512.03385 
 
@@ -45,6 +48,8 @@ https://arxiv.org/abs/1603.05027
 
 
 <img width="991" alt="image" src="https://user-images.githubusercontent.com/62819751/226486819-446f08f2-d963-4aba-bd1e-2d158031db6e.png">
+
+The Image above shows the network and how it processes the images until it uses the softmax function at the end to make the final prediction.
 
 
 Results
@@ -63,9 +68,19 @@ RESNET50V2:
 <img width="171" alt="Screenshot 2023-03-20 092640" src="https://user-images.githubusercontent.com/62819751/226486492-b3b62973-1f35-4b71-9deb-e56023b2dcd7.png">
 
 
+
+
 VGG19
 ------------------------------------------------------------------------------------------
+VGG19 is a variant of VGG model which in short consists of 19 layers (16 convolution layers, 3 Fully connected layer, 5 MaxPool layers and 1 SoftMax layer).
 
+A fixed size of (224 * 224) RGB image was given as input to this network which means that the matrix was of shape (224,224,3).
+
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/62819751/226488809-2bd0d1ba-1262-4215-9908-197f10f5aeb9.png">
+
+The above image clearly shows how vgg19 architecture works.
+
+It takes the image and uses convolution and maxpooling layers until it reaches the fully connected layers and then the softmax layer for final decision making. 
 
 
 Results
@@ -81,5 +96,18 @@ AlexNet
 
 
 
-Results
+Final Thoughts
 ------------------------------------------------------------------------------------------
+
+A little dissapointed that the results were not stellar as anticipated.
+
+The results were not too great even with a longer training session of 20 epochs. This is due to the images not being preprocessed and augmented. If there was more time I would have used KOALAs image augmentation to augment the images for better results.
+
+https://medium.com/analytics-vidhya/image-augmentation-9b7be3972e27
+
+Image data augmentation is used to expand the training dataset to improve the model’s performance and ability to generalize. This would have gave greater accuracy when predicting what car it could have been.
+
+
+Regardless, the model was able to be processed the CNN and was able to train and classify the images. It was a fun experiment that could be done better with a faster machine and more time for training the models with more data augmentations. 
+
+
