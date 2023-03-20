@@ -16,18 +16,67 @@ A confusion matrix will be generated to determine how accurate the model was and
 
 If there is time I would like to load more images of cars that the dataset does not have like subarus, so the algorithm can determine more cars and it will help further prove that is classifying the cars correctly. 
 
-
-RESNET50
+h5.py
 ------------------------------------------------------------------------------------------
+The h5.py takes in the dataset. The dataset is divided into folders of car training images and car testing images. The labels are found in the devkit and are assigned numbers to each of the labels (Make, Model, Year). The h5.py file compresses these files and resizes them to match what is needed for the CNN to be processed. It reads in the images individually and resizes them to 224x224x3 for the RESNET and VGG19 using opencv. It also adjusts the colors to range from 0-1 instead 0-255 for normalization. For the Alexnet Model it was adjusted to 227x227x3 to cater for that model. After the tool was ran it produced the h5 files:
 
-The attached resnet50modelsummary.txt shows the model summary.
+test_cars_224.h5
+
+train_cars_224.h5
+
+test_cars_227.h5
+
+train_cars_227.h5
+
+These files contains the data array that will be used and has the labels associated with each image. 
+
+
+RESNET50 and RESNET50V2
+------------------------------------------------------------------------------------------
+RESNET stands for Residual Network and is a convolution neural network that was introduced in "Deep Residual Leaning for Image Recognition" by He Kaimin, Zhang Xiangyu, Ren Shaoqing, and Sun Jian. This has 50 layers of convulational neural network (48 conv, 1 MaxPooling, and 1 Avg pool).
+
+The attached ResNet50_Model_Summary.txt shows the model summary.
+
+RESNET50:
+https://arxiv.org/abs/1512.03385 
+
+RESNET50V2:
+https://arxiv.org/abs/1603.05027
+
+
+<img width="991" alt="image" src="https://user-images.githubusercontent.com/62819751/226486819-446f08f2-d963-4aba-bd1e-2d158031db6e.png">
 
 
 Results
 ------------------------------------------------------------------------------------------
+RESNET50:
+
+<img width="394" alt="Screenshot 2023-03-20 092625" src="https://user-images.githubusercontent.com/62819751/226486681-16fc0685-d7fb-49bf-85be-925bec697018.png">
+
+<img width="433" alt="resnet" src="https://user-images.githubusercontent.com/62819751/226486449-36076515-5b8b-49cf-ba13-7a4f95e44948.png">
 
 
-VGG16
+RESNET50V2:
+
+<img width="394" alt="Screenshot 2023-03-20 092625" src="https://user-images.githubusercontent.com/62819751/226486690-ba502a32-46b6-4a28-bd81-0d32af33b2b9.png">
+
+<img width="171" alt="Screenshot 2023-03-20 092640" src="https://user-images.githubusercontent.com/62819751/226486492-b3b62973-1f35-4b71-9deb-e56023b2dcd7.png">
+
+
+VGG19
+------------------------------------------------------------------------------------------
+
+
+
+Results
+------------------------------------------------------------------------------------------
+<img width="377" alt="Screenshot 2023-03-20 165219" src="https://user-images.githubusercontent.com/62819751/226486696-ecda713f-d433-4e97-9584-5a46c38c5790.png">
+
+<img width="182" alt="Screenshot 2023-03-20 165202" src="https://user-images.githubusercontent.com/62819751/226486521-d7733e33-5857-4234-8554-40d86db76325.png">
+
+
+
+AlexNet
 ------------------------------------------------------------------------------------------
 
 
